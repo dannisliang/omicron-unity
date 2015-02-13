@@ -32,6 +32,12 @@ public class DebugGUIManager : MonoBehaviour {
 		omgManager = GameObject.FindGameObjectWithTag ("OmicronManager").GetComponent<OmicronManager> ();
 		cave2manager = GameObject.FindGameObjectWithTag ("OmicronManager").GetComponent<CAVE2Manager> ();
 		playerController = GameObject.FindGameObjectWithTag ("PlayerController").GetComponent<OmicronPlayerController> ();
+
+		if( guiText == null )
+		{
+			gameObject.AddComponent<GUIText>();
+			transform.position = new Vector3( 0.01f, 0.05f, 0 );
+		}
 	}
 
 	void Update()
