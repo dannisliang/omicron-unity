@@ -59,6 +59,7 @@ public class WandPointer : OmicronWandUpdater {
 			if( cave2Manager.getWand(wandID).GetButtonDown(CAVE2Manager.Button.Button3) )
 			{
 				hit.collider.gameObject.SendMessage("OnWandButtonClick", SendMessageOptions.DontRequireReceiver );
+				BroadcastMessage("Fire");
 			}
 
 			// Laser button is held down
@@ -66,6 +67,7 @@ public class WandPointer : OmicronWandUpdater {
 			{
 				// Tell hit object laser button is held down
 				hit.collider.gameObject.SendMessage("OnWandButtonHold", SendMessageOptions.DontRequireReceiver );
+
 				Debug.DrawLine(ray.origin, hit.point);
 
 				// Set the laser distance at the collision point
@@ -81,9 +83,11 @@ public class WandPointer : OmicronWandUpdater {
 		}
 
 		// Do this on all nodes
-		laser.enabled = laserActivated;
+		laser.enabled = (drawLaser && laserActivated);
+
 		if( laserActivated && drawLaser )
 		{
+
 			if (wandHit)
 			{
 				laserParticle.transform.position = laserPosition;
